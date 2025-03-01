@@ -28,3 +28,13 @@ def start(message):
     markup.add("📋 Часто задаваемые вопросы")
     markup.add("🔧 Связаться с программистами", "📦 Связаться с отделом продаж")
     bot.send_message(message.chat.id, "Привет! Я бот технической поддержки. Чем могу помочь?", reply_markup=markup)
+
+
+@bot.message_handler(func=lambda message: message.text == "📋 Часто задаваемые вопросы")
+def faq(message):
+    response = "Часто задаваемые вопросы:\n"
+    for q, a in FAQ.items():
+        response += f"\n*{q}*\n{a}\n"
+        bot.send_message(message.chat.id, response, parse_mode="Markdown")
+
+
