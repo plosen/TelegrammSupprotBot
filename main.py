@@ -3,7 +3,7 @@ import telebot
 import sqlite3
 import os
 
-TOKEN = "x"
+TOKEN = "8142382126:AAGFi4UEy7OWvQEiU5RAnxN9A6vXj_GrtqI"
 bot = telebot.TeleBot(TOKEN)
 
 conn = sqlite3.connect("support_requests.db", check_same_thread=False )
@@ -37,4 +37,12 @@ def faq(message):
         response += f"\n*{q}*\n{a}\n"
         bot.send_message(message.chat.id, response, parse_mode="Markdown")
 
+
+@bot.message_handler(func=lambda message: message.text == "🔧 Связаться с программистами")
+def contact_sales(message):
+    bot.send_message(message.chat.id, "Опишите вашу проблему, и мы передадим её в отдел продаж.")
+
+@bot.message_handler(func=lambda message: True)
+def handle_request(message):
+    department = "программисты" if "программист" in message.text.lower() else "отдел продаж"
 
