@@ -9,11 +9,11 @@ bot = telebot.TeleBot(TOKEN)
 conn = sqlite3.connect("support_requests.db", check_same_thread=False )
 cursor = conn.cursor()
 
-cursor.execute('''CREATE TABLE IF NOT EXISTS request (
-                    id INTEGER PRIMARY KEY,
-                    user_id INTEGER,
-                    message TEXT,
-                    department TEXT)''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS requests (
+                 id INTEGER PRIMARY KEY,
+                 user_id INTEGER,
+                 message TEXT,
+                 department TEXT)''')
 
 conn.commit()
 
