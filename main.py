@@ -42,7 +42,21 @@ def faq(message):
 def contact_sales(message):
     bot.send_message(message.chat.id, "Опишите вашу проблему, и мы передадим её в отдел продаж.")
 
+
 @bot.message_handler(func=lambda message: True)
 def handle_request(message):
     department = "программисты" if "программист" in message.text.lower() else "отдел продаж"
+
+    cursor.execute("INSERT INTO requests (user_id, message, department) VALUES (?, ?, ?)",
+                   (message.from_user.id, message.text, department))
+    conn.commit()
+
+    bot.send_message(message.chat.id, f"Ваш запрос передан в {department}.")
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    bot.polling(none_stop=True)
+
+
 
