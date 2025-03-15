@@ -7,7 +7,7 @@ from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 logging.basicConfig(level=logging.INFO)
 
-# Получаем токен из переменной окружения (РЕКОМЕНДУЕТСЯ)
+
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8142382126:AAGFi4UEy7OWvQEiU5RAnxN9A6vXj_GrtqI")
 bot = telebot.TeleBot(TOKEN)
 
@@ -100,7 +100,7 @@ def view_requests(message):
         response += f"\n📍 *ID:* {req[0]}\n👤 *Пользователь:* {req[1]}\n🏢 *Отдел:* {req[3]}\n📩 *Запрос:* {req[2]}\n🕒 *Дата:* {req[4]}\n"
     bot.send_message(message.chat.id, response, parse_mode="Markdown")
 
-# Запуск бота
+
 if __name__ == "__main__":
     logging.info("Бот запущен...")
     bot.polling(none_stop=True)
